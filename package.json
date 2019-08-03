@@ -1,0 +1,15 @@
+{
+  "name": "dict",
+  "version": "1.0.1",
+  "main": "dict",
+  "license": "MIT",
+  "author": "Aishwarya Vaibhav",
+  "preferGlobal": true,
+  "bin": "./dict",
+  "dependencies": {
+    "commander": "^2.20.0",
+    "inquirer": "^6.5.0",
+    "chalk": "latest",
+    "request": "latest"
+  }
+}
