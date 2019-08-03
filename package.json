@@ -7,9 +7,10 @@
   "preferGlobal": true,
   "bin": "./dict",
   "dependencies": {
+    "chalk": "latest",
     "commander": "^2.20.0",
     "inquirer": "^6.5.0",
-    "chalk": "latest",
+    "pad": "^3.2.0",
     "request": "latest"
   }
 }

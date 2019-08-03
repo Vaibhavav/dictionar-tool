@@ -5,7 +5,8 @@ const program = require('commander'),
     chalk = require("chalk"),
     pkg = require('./package.json'),
     externalApi = require('./externalApi'),
-    utils = require('./utils');
+    utils = require('./utils'),
+    game = require('./game');
 /** * list function definition * */
 let def = (word) => {
     return new Promise(function(resolve, reject) {
@@ -16,7 +17,7 @@ let def = (word) => {
             resolve();
         });
     });
-}
+};
 let syn = (word) => {
     return new Promise(function(resolve, reject) {
         externalApi.hitApi('relatedWords', word).then(function (result) {
@@ -26,7 +27,7 @@ let syn = (word) => {
             resolve();
         });
     });
-}
+};
 let ant = (word) => {
     return new Promise(function(resolve, reject) {
         externalApi.hitApi('relatedWords', word).then(function (result) {
@@ -36,7 +37,7 @@ let ant = (word) => {
             resolve();
         });
     });
-}
+};
 let ex = (word) => {
     return new Promise(function(resolve, reject) {
         externalApi.hitApi('examples', word).then(function (result) {
@@ -46,33 +47,30 @@ let ex = (word) => {
             resolve();
         });
     });
-}
+};
 let dict = async (word) => {
     await def(word);
     await syn(word);
     await ant(word);
     await ex(word);
-}
+};
 let random = () => {
     externalApi.hitApi('random').then(function (result) {
         console.log('Word of the Day is', chalk.green.bold(utils.capitalizeFirstLetter(result.word)));
         dict(result.word)
     });
-}
-let play = () => {
-    console.log(chalk.blue.bold('we are in the game'))
-}
+};
 
 program.version(pkg.version).command('def <word>').action(def);
 program.version(pkg.version).command('syn <word>').action(syn);
 program.version(pkg.version).command('ant <word>').action(ant);
 program.version(pkg.version).command('ex <word>').action(ex);
 program.version(pkg.version).command('dict <word>').action(dict);
-program.version(pkg.version).command('play').action(play);
+program.version(pkg.version).command('play').action(game.initiateGame);
 
 program.parse(process.argv);
 // if program was called with no arguments, show help.
 if (program.args.length === 0)
     random();
-else if (program.args.length === 1)
-    dict(program.args[0].toString());
+// else if (program.args.length === 1 && program.args[0] !== 'play')
+    // dict(program.args[0].toString());
