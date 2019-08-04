@@ -2,7 +2,6 @@ const inquirer = require('inquirer'),
     chalk = require("chalk"),
     externalApi = require('./externalApi'),
     utils = require('./utils'),
-    dict = require('./dict'),
     exec = require('child_process').exec;
 
 
@@ -26,15 +25,11 @@ const game = {
                 })
             }
         });
-        let examples = (await externalApi.hitApi('examples', word)).examples.map(function (item) {
-            return utils.capitalizeFirstLetter(item.text);
-        });
         let gameObj = {
             word: word,
             definitions: definitions,
             synonmys: synonmys,
             antonyms: antonyms,
-            examples: examples,
             hintCount: {
                 jumble: 1,
                 definitions: definitions.length,
@@ -72,7 +67,6 @@ const game = {
                 }
 
             });
-        // process.exit(2);
     },
     afterInput: function (gameObj) {
         console.log(chalk.magenta.bold('*******************************************'))
