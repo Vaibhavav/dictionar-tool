@@ -5,16 +5,16 @@ const utils = {
     },
     parseDefinitions: function (result) {
         let ret = '';
-        result.forEach(function (item,index) {
-            ret += (index+1) + `. ${item.text}\n`
-        })
+        result.forEach(function (item, index) {
+            ret += (index + 1) + `. ${item.text}\n`
+        });
         return ret;
     },
     parseExamples: function (result) {
         let ret = '';
-        result.examples.forEach(function (item,index) {
-            ret += (index+1) + `. ${item.text}\n`
-        })
+        result.examples.forEach(function (item, index) {
+            ret += (index + 1) + `. ${item.text}\n`
+        });
         return ret;
     },
     parseSynonym: function (result) {
@@ -27,12 +27,11 @@ const utils = {
                     })
                 }
             });
-            if(ret == ''){
-                ret = 'Sorry! Synonym not found'
+            if (ret == '') {
+                ret = "Sorry! Synonym not found\n"
             }
-        }
-        catch (e) {
-            ret = 'Sorry! Synonym not found'
+        } catch (e) {
+            ret = "Sorry! Synonym not found\n"
         }
         return ret;
     },
@@ -46,14 +45,39 @@ const utils = {
                     })
                 }
             });
-            if(ret == ''){
-                ret = 'Sorry! Antonym not found'
+            if (ret == '') {
+                ret = "Sorry! Antonym not found\n"
             }
-        }
-        catch (e) {
-            ret = 'Sorry! Antonym not found'
+        } catch (e) {
+            ret = "Sorry! Antonym not found\n"
         }
         return ret;
+    },
+    shuffle: function (array) {
+        if(array.length <2){
+            return array;
+        }
+        const originalArray = [...array];
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        if(originalArray == array){
+            return utils.shuffle(array);
+        }
+        else {
+            return array;
+        }
     }
 }
 
