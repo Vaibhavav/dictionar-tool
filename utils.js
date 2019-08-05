@@ -4,18 +4,26 @@ const utils = {
         return string.charAt(0).toUpperCase() + string.slice(1);
     },
     parseDefinitions: function (result) {
-        let ret = '';
-        result.forEach(function (item, index) {
-            ret += (index + 1) + `. ${item.text}\n`
-        });
-        return ret;
+        try {
+            let ret = '';
+            result.forEach(function (item, index) {
+                ret += (index + 1) + `. ${item.text}\n`
+            });
+            return ret;
+        }catch (e) {
+            return "Sorry! Definition not found."
+        }
     },
     parseExamples: function (result) {
-        let ret = '';
-        result.examples.forEach(function (item, index) {
-            ret += (index + 1) + `. ${item.text}\n`
-        });
-        return ret;
+        try {
+            let ret = '';
+            result.examples.forEach(function (item, index) {
+                ret += (index + 1) + `. ${item.text}\n`
+            });
+            return ret;
+        }catch (e) {
+            return "Sorry! Example not found."
+        }
     },
     parseSynonym: function (result) {
         let ret = '';

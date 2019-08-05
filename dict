@@ -69,8 +69,8 @@ program.version(pkg.version).command('dict <word>').action(dict);
 program.version(pkg.version).command('play').action(game.initiateGame);
 
 program.parse(process.argv);
-// if program was called with no arguments, show help.
 if (program.args.length === 0)
     random();
-// else if (program.args.length === 1 && program.args[0] !== 'play')
-    // dict(program.args[0].toString());
+else if (program.args.length === 1 && !program.rawArgs.includes('play')) {
+    dict(program.rawArgs[2].toString());
+}
